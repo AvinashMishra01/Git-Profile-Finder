@@ -30,7 +30,12 @@ getProfile() {
 if(this.name ==null || this.name=='' || this.name.length==0 || this.name.indexOf(' ') !== -1)
 {
   let  modificationName= this.name.replace(' ','');
-Swal.fire("Info", "Please enter a valid username. Try onece to remove the space in between name! use name like:- " +modificationName, "info");
+  Swal.fire({
+    title: "Info",
+    text: "Please enter a valid username. Try once to remove the space in between the name!" + 
+      (this.name.indexOf(' ') !== -1 ? "\nUse name like: " + modificationName : ""),
+    icon: "info"
+  });
 return;
 }
 
