@@ -28,6 +28,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
  - npm install --save @angular/cdk
  - npm i sweetalert2
    
+## For Running The Application
+- Clone/ Download the repo
+- Run npm i ( --force )
+- Run ng s -o
 
 
 ## Further help
