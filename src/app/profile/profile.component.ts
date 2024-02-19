@@ -1,44 +1,56 @@
 
-import { Component,  } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { ProfileService } from '../profile.service';
 import Swal from 'sweetalert2';
-
-
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent  {
+export class ProfileComponent implements OnInit  {
 
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService, private route:ActivatedRoute, private router:Router) {}
+
+
 
   name;
-  profileData;
+  profileData: any;
   repositories;
   
 
   displayedRepositories;
   pageSize=5;
   currentPage = 0;
-
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.name = params.get('username');
+      if (this.name) {
+        this.getProfile();
+      }
+    });
+  }
 
 getProfile() {
+
   console.log("this is url", this.name);
 if(this.name ==null || this.name=='' || this.name.length==0 || this.name.indexOf(' ') !== -1)
 {
-  let  modificationName= this.name.replace(' ','');
+  let  modificationName= this.name?.replace(' ','');
   Swal.fire({
     title: "Info",
     text: "Please enter a valid username. Try once to remove the space in between the name!" + 
-      (this.name.indexOf(' ') !== -1 ? "\nUse name like: " + modificationName : ""),
+      (this.name?.indexOf(' ') !== -1 ? "\nUse name like: " + modificationName : ""),
     icon: "info"
   });
+  this.router.navigate(['/profile']);
 return;
 }
 
+this.router.navigate(['/profile', this.name]);
   this.profileService.getProfile(this.name)?.subscribe(
     profileData => {
       console.log(profileData);
