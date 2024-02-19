@@ -1,0 +1,100 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+    <!-- Search input and button -->
+
+    <div class="search-container">
+
+        <mat-form-field class="example-form-field">
+            <mat-label>Enter Name</mat-label>
+            <input matInput type="text" [(ngModel)]="name">
+            <button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+                <mat-icon class="mat-icon notranslate material-icons" aria-hidden="true">close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="getProfile()">Search</button>
+    </div>
+
+    <div *ngIf="profileData" fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
+
+
+        <!-- Left grid: User profile details -->
+
+        <div fxFlex="50" fxFlex.xs="90">
+            <div class="user-details">
+                <!-- User image and main details -->
+                <img [src]="profileData?.avatar_url" alt="User Image" class="user_avatar">
+                <!-- Main details -->
+                <div class="more_detail">
+                    <p class="user_desc">Name: {{profileData?.name || profileData?.login}}</p>
+                    <p class="user_desc" *ngIf="profileData?.location" >Location: {{profileData?.location}} </p>
+                    <p class="user_desc" *ngIf="profileData?.followers">Followers: {{profileData?.followers}} </p>
+                    <p class="user_desc" *ngIf="profileData?.following">Folloeing: {{profileData?.following}} </p>
+                    <p class="user_desc">Public Repositories: {{profileData?.public_repos || 'No Repository'}} </p>
+                    <p class="user_desc" *ngIf="profileData?.bio">Bio : {{profileData?.bio}}</p>
+               </div>
+            </div>
+        </div>
+
+
+        <!-- Right grid: List of repositories -->
+        <div fxFlex="50" fxFlex.xs="100">
+
+            <mat-card  class="main_card">
+                <mat-card-header class="card_header">
+                    <mat-card-title>Repositories</mat-card-title>
+                </mat-card-header>
+                <mat-card-content class="scroll_card">
+                    <!-- Repository list with paginator -->
+             
+                    <mat-list>
+                        <ng-container *ngFor="let repo of displayedRepositories; let last = last;">
+                            <mat-list-item  style="height: 100%;">
+                                <!-- Repository details -->
+
+                                <mat-card class="example-card" style="height: 100%;">
+                                    <mat-card-header style="gap:1.2%; text-wrap: pretty;     justify-content: space-around; align-items: center;"> 
+
+                                        <div class="left">
+                                          <div mat-card-avatar class="example-header-image"
+                                              [style.backgroundImage]="'url(' + repo.owner.avatar_url + ')'">
+                                          </div>
+                                          <div>
+                                            <mat-card-title mat-line class="mat-title">{{ repo.name }}</mat-card-title>
+                                            <mat-card-subtitle class="mat-subtitle">Created Date: {{repo.created_at |
+                                                date}}</mat-card-subtitle>
+                                                </div>
+                                        </div>
+                                        <div class="right">
+                                            <mat-card-subtitle class="mat-subtitle">Last Update Date: {{repo.updated_at
+                                                | date}}</mat-card-subtitle>
+                                        </div>
+                                    </mat-card-header>
+
+                                    <mat-card-content>
+                                     
+                                    </mat-card-content>
+                                    <mat-card-actions class="bottom" style="justify-content: space-around;">
+                                        <button mat-raised-button color="primary" ><a [href]="repo.clone_url" mat-button (click)="goTORepo(repo.clone_url)" target="_blank" rel="noopener" style="color: white;">
+                                            Go To Repositories</a>  </button>
+                                    
+                                        <button mat-button >SHARE</button>
+
+                                    </mat-card-actions>
+                                </mat-card>
+
+                            </mat-list-item>
+                        </ng-container>
+                    </mat-list>
+
+                </mat-card-content>
+
+                <div class="paginator" *ngIf="displayedRepositories">
+                    <button  mat-button (click)="previousPage()" [disabled]="isFirstPage()" >  <mat-icon>navigate_before</mat-icon></button>
+                    <button mat-button (click)="nextPage()"  [disabled]="isLastPage()"> <mat-icon>navigate_next</mat-icon></button>
+                </div>                   
+            </mat-card>
+
+
+
+        </div>
+    </div>
+</div>
