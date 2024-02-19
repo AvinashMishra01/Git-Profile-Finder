@@ -25,34 +25,14 @@ export class ProfileComponent  {
   currentPage = 0;
 
 
-// getProfile() {
-//   console.log("this is url", this.name);
-  
-//   this.profileService.getProfile(this.name).subscribe(profileData => {
-//     console.log(profileData);
-//     this.profileData = profileData;
-
-//     // Get repositories URL
-//     const repositoriesUrl = profileData['repos_url'];
-
-//     // Fetch repositories
-//     this.profileService.getRepositories(repositoriesUrl).subscribe(repositoriesData => {
-//       console.log(repositoriesData);
-//       this.repositories = repositoriesData;
-//       this.displayedRepositories= this.repositories.slice(0, this.pageSize);
-//     }, error => {
-//       console.error('Error fetching repositories:', error);
-//     });
-//   }, error => {
-//     Swal.fire('Oops...', 'Something went wrong! Please try again. Try to not give space in betweeen the name', 'error');
-//   this.repositories=[]
-//   this.profileData= null
-//   this.displayedRepositories=[];
-//   });
-// }
-
 getProfile() {
   console.log("this is url", this.name);
+if(this.name ==null || this.name=='' || this.name.length==0 || this.name.indexOf(' ') !== -1)
+{
+  let  modificationName= this.name.replace(' ','');
+Swal.fire("Info", "Please enter a valid username. Try onece to remove the space in between name! use name like:- " +modificationName, "info");
+return;
+}
 
   this.profileService.getProfile(this.name)?.subscribe(
     profileData => {

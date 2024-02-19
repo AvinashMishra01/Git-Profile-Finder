@@ -21,15 +21,17 @@
         <div fxFlex="50" fxFlex.xs="90">
             <div class="user-details">
                 <!-- User image and main details -->
+                <div class="user_avtar_div">
                 <img [src]="profileData?.avatar_url" alt="User Image" class="user_avatar">
-                <!-- Main details -->
+               </div> 
+               <!-- Main details -->
                 <div class="more_detail">
-                    <p class="user_desc">Name: {{profileData?.name || profileData?.login}}</p>
-                    <p class="user_desc" *ngIf="profileData?.location" >Location: {{profileData?.location}} </p>
-                    <p class="user_desc" *ngIf="profileData?.followers">Followers: {{profileData?.followers}} </p>
-                    <p class="user_desc" *ngIf="profileData?.following">Folloeing: {{profileData?.following}} </p>
-                    <p class="user_desc">Public Repositories: {{profileData?.public_repos || 'No Repository'}} </p>
-                    <p class="user_desc" *ngIf="profileData?.bio">Bio : {{profileData?.bio}}</p>
+                    <p class="user_desc"> <b> Name:</b> {{profileData?.name || profileData?.login}}</p>
+                    <p class="user_desc" *ngIf="profileData?.location" ><b>Location:</b>  {{profileData?.location}} </p>
+                    <p class="user_desc" *ngIf="profileData?.followers"> <b>Followers:</b>  {{profileData?.followers}} </p>
+                    <p class="user_desc" *ngIf="profileData?.following"> <b> Folloeing:</b> {{profileData?.following}} </p>
+                    <p class="user_desc"> <b>Public Repositories:</b>  {{profileData?.public_repos || 'No Repository'}} </p>
+                    <p class="user_desc" *ngIf="profileData?.bio"> <b>Bio :</b>  {{profileData?.bio}}</p>
                </div>
             </div>
         </div>

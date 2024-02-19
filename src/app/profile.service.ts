@@ -11,7 +11,7 @@ export class ProfileService {
   constructor(private http: HttpClient) { }
 
   getProfile(name: string) {
-    // console.log("this is url service", name);
+  
     return this.http.get(`https://api.github.com/users/${name}`).pipe(
       catchError(this.handleError)
     );
