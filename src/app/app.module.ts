@@ -21,7 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
  
 
 import { MatIconModule } from '@angular/material/icon';
-
+import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule
 
   ],
   providers: [],

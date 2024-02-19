@@ -37,6 +37,10 @@
 
 .more_detail{
   margin: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 
@@ -80,7 +84,12 @@
   margin-left: -10rem;
 }
 
-
+.topic{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
 
 .paginator{
   display: flex;

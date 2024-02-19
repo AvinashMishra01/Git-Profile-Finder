@@ -22,17 +22,20 @@
             <div class="user-details">
                 <!-- User image and main details -->
                 <div class="user_avtar_div">
-                <img [src]="profileData?.avatar_url" alt="User Image" class="user_avatar">
-               </div> 
-               <!-- Main details -->
+                    <img [src]="profileData?.avatar_url" alt="User Image" class="user_avatar">
+                </div>
+                <!-- Main details -->
                 <div class="more_detail">
                     <p class="user_desc"> <b> Name:</b> {{profileData?.name || profileData?.login}}</p>
-                    <p class="user_desc" *ngIf="profileData?.location" ><b>Location:</b>  {{profileData?.location}} </p>
-                    <p class="user_desc" *ngIf="profileData?.followers"> <b>Followers:</b>  {{profileData?.followers}} </p>
-                    <p class="user_desc" *ngIf="profileData?.following"> <b> Folloeing:</b> {{profileData?.following}} </p>
-                    <p class="user_desc"> <b>Public Repositories:</b>  {{profileData?.public_repos || 'No Repository'}} </p>
-                    <p class="user_desc" *ngIf="profileData?.bio"> <b>Bio :</b>  {{profileData?.bio}}</p>
-               </div>
+                    <p class="user_desc" *ngIf="profileData?.location"><b>Location:</b> {{profileData?.location}} </p>
+                    <p class="user_desc" *ngIf="profileData?.followers"> <b>Followers:</b> {{profileData?.followers}}
+                    </p>
+                    <p class="user_desc" *ngIf="profileData?.following"> <b> Folloeing:</b> {{profileData?.following}}
+                    </p>
+                    <p class="user_desc"> <b>Public Repositories:</b> {{profileData?.public_repos || 'No Repository'}}
+                    </p>
+                    <p class="user_desc" *ngIf="profileData?.bio"> <b>Bio :</b> {{profileData?.bio}}</p>
+                </div>
             </div>
         </div>
 
@@ -40,30 +43,33 @@
         <!-- Right grid: List of repositories -->
         <div fxFlex="50" fxFlex.xs="100">
 
-            <mat-card  class="main_card">
+            <mat-card class="main_card">
                 <mat-card-header class="card_header">
                     <mat-card-title>Repositories</mat-card-title>
                 </mat-card-header>
                 <mat-card-content class="scroll_card">
                     <!-- Repository list with paginator -->
-             
+
                     <mat-list>
                         <ng-container *ngFor="let repo of displayedRepositories; let last = last;">
-                            <mat-list-item  style="height: 100%;">
+                            <mat-list-item style="height: 100%;">
                                 <!-- Repository details -->
 
                                 <mat-card class="example-card" style="height: 100%;">
-                                    <mat-card-header style="gap:1.2%; text-wrap: pretty;     justify-content: space-around; align-items: center;"> 
+                                    <mat-card-header
+                                        style="gap:1.2%; text-wrap: pretty;     justify-content: space-around; align-items: center;">
 
                                         <div class="left">
-                                          <div mat-card-avatar class="example-header-image"
-                                              [style.backgroundImage]="'url(' + repo.owner.avatar_url + ')'">
-                                          </div>
-                                          <div>
-                                            <mat-card-title mat-line class="mat-title">{{ repo.name }}</mat-card-title>
-                                            <mat-card-subtitle class="mat-subtitle">Created Date: {{repo.created_at |
-                                                date}}</mat-card-subtitle>
-                                                </div>
+                                            <div mat-card-avatar class="example-header-image"
+                                                [style.backgroundImage]="'url(' + repo.owner.avatar_url + ')'">
+                                            </div>
+                                            <div>
+                                                <mat-card-title mat-line class="mat-title">{{ repo.name
+                                                    }}</mat-card-title>
+                                                <mat-card-subtitle class="mat-subtitle">Created Date: {{repo.created_at
+                                                    |
+                                                    date}}</mat-card-subtitle>
+                                            </div>
                                         </div>
                                         <div class="right">
                                             <mat-card-subtitle class="mat-subtitle">Last Update Date: {{repo.updated_at
@@ -71,14 +77,21 @@
                                         </div>
                                     </mat-card-header>
 
-                                    <mat-card-content>
-                                     
+                                    <mat-card-content *ngIf="repo['topics'].length>0">
+                                        <div class="topic"> <b>Topics :- </b>
+                                            <mat-chip-set *ngFor="let topic of repo.topics" class="example-chip">
+                                                <mat-chip class="example-box" cdkDrag>{{topic}}</mat-chip>  
+                                            </mat-chip-set>
+                                        </div>
+
                                     </mat-card-content>
                                     <mat-card-actions class="bottom" style="justify-content: space-around;">
-                                        <button mat-raised-button color="primary" ><a [href]="repo.clone_url" mat-button (click)="goTORepo(repo.clone_url)" target="_blank" rel="noopener" style="color: white;">
-                                            Go To Repositories</a>  </button>
-                                    
-                                        <button mat-button >SHARE</button>
+                                        <button mat-raised-button color="primary"><a [href]="repo.clone_url" mat-button
+                                                (click)="goTORepo(repo.clone_url)" target="_blank" rel="noopener"
+                                                style="color: white;">
+                                                Go To Repositories</a> </button>
+
+                                        <!-- <button mat-button >SHARE</button> -->
 
                                     </mat-card-actions>
                                 </mat-card>
@@ -90,9 +103,11 @@
                 </mat-card-content>
 
                 <div class="paginator" *ngIf="displayedRepositories">
-                    <button  mat-button (click)="previousPage()" [disabled]="isFirstPage()" >  <mat-icon>navigate_before</mat-icon></button>
-                    <button mat-button (click)="nextPage()"  [disabled]="isLastPage()"> <mat-icon>navigate_next</mat-icon></button>
-                </div>                   
+                    <button mat-button (click)="previousPage()" [disabled]="isFirstPage()">
+                        <mat-icon>navigate_before</mat-icon></button>
+                    <button mat-button (click)="nextPage()" [disabled]="isLastPage()">
+                        <mat-icon>navigate_next</mat-icon></button>
+                </div>
             </mat-card>
 
 
