@@ -15,8 +15,8 @@ export class ProfileComponent  {
 
   constructor(private profileService: ProfileService) {}
 
-  name='Avinash';
-  profileData: any;
+  name;
+  profileData;
   repositories;
   
 
