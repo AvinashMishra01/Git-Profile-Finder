@@ -77,12 +77,18 @@
                                         </div>
                                     </mat-card-header>
 
-                                    <mat-card-content *ngIf="repo['topics'].length>0">
+                                    <mat-card-content >
+                                        <div *ngIf="repo.description" class="description_div"> 
+                                        <p> <b>Description :- </b> {{repo.description}} </p>
+                                        </div>
+
+                                        <div *ngIf="repo['topics'].length>0">
                                         <div class="topic"> <b>Topics :- </b>
                                             <mat-chip-set *ngFor="let topic of repo.topics" class="example-chip">
                                                 <mat-chip class="example-box" cdkDrag>{{topic}}</mat-chip>  
                                             </mat-chip-set>
                                         </div>
+                                    </div>
 
                                     </mat-card-content>
                                     <mat-card-actions class="bottom" style="justify-content: space-around;">
@@ -91,7 +97,7 @@
                                                 style="color: white;">
                                                 Go To Repositories</a> </button>
 
-                                        <!-- <button mat-button >SHARE</button> -->
+                                      
 
                                     </mat-card-actions>
                                 </mat-card>
@@ -103,6 +109,7 @@
                 </mat-card-content>
 
                 <div class="paginator" *ngIf="displayedRepositories">
+                   <span>10 Item/page (Total- {{repositories.length}})</span>
                     <button mat-button (click)="previousPage()" [disabled]="isFirstPage()">
                         <mat-icon>navigate_before</mat-icon></button>
                     <button mat-button (click)="nextPage()" [disabled]="isLastPage()">

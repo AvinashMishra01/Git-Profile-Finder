@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit  {
   
 
   displayedRepositories;
-  pageSize=5;
+  pageSize=10;
   currentPage = 0;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

@@ -91,6 +91,14 @@
   gap: 12px;
 }
 
+.description_div{
+  text-wrap: pretty;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+
 .paginator{
   display: flex;
   justify-content: center;
