@@ -39,7 +39,7 @@ getProfile() {
   console.log("this is url", this.name);
 if(this.name ==null || this.name=='' || this.name.length==0 || this.name.indexOf(' ') !== -1)
 {
-  let  modificationName= this.name?.replace(' ','');
+  let  modificationName= this.name?.replace(/\s/g,'');
   Swal.fire({
     title: "Info",
     text: "Please enter a valid username. Try once to remove the space in between the name!" + 
@@ -79,7 +79,8 @@ this.router.navigate(['/profile', this.name]);
     },
     error => {
       console.error('Error fetching profile:', error);
-      Swal.fire('Oops...', 'Error fetching profile data. Please try again later.', 'error');
+      // Swal.fire('Oops...', 'Error fetching profile data. Please try again later.', 'error');
+      Swal.fire('Oops...', 'User not found !', 'warning');
       this.repositories = [];
       this.profileData = null;
       this.displayedRepositories = [];
